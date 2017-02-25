@@ -3,6 +3,7 @@ class NumberToWord
 
 
   def letter_combinations(digits)
+    return [] if digits.blank? || digits.length != 10 || digits.split('').select{|a|(a.to_i == 0 || a.to_i == 1)}.length > 0
     letters = {"2" => ["a", "b", "c"],"3" => ["d", "e", "f"],"4" => ["g", "h", "i"],"5" => ["j", "k", "l"],"6" => ["m", "n", "o"],"7" => ["p", "q", "r", "s"],"8" => ["t", "u", "v"],"9" => ["w", "x", "y", "z"]}
     dictionary = []
     file_path = Rails.root.join("db","dictionary.txt")
@@ -22,20 +23,15 @@ class NumberToWord
       next if second_combination.blank?
       results[i] = [(first_combination & dictionary), (second_combination & dictionary)]
     end
-    #results[9] = keys.shift.product(*keys).map(&:join)
-    # final_array = []
-    # results.each do |key, combinataion|
-    #   first_combo = (combinataion.first & dictionary)
-    #   next if first_combo.blank?
-    #   second_combo = (combinataion.last & dictionary)
-    #   next if second_combo.blank?
-    #   final_array[key] = [first_combo, second_combo]
-    #end
-    #final_array.compact!
-    debugger
-    results
-    #debugger
-    #print results
+    final_words = []
+    results.each do |key, combinataions|
+      next if combinataions.first.blank? || combinataions.last.blank?
+      combinataions.first.product(combinataions.last).each do |combo_words|
+        final_words << combo_words
+      end
+    end
+    final_words << (keys.shift.product(*keys).map(&:join) & dictionary).join(", ") # matche with all character
+    final_words
   end
 
   def product_of_array(keys, words=[])
