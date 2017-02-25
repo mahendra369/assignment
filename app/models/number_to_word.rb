@@ -16,17 +16,24 @@ class NumberToWord
       first_array = keys[0..i]
       second_array = keys[i + 1..total_number]
       next if first_array.length < 3 || second_array.length < 3
-      results[i] = [first_array.shift.product(*first_array).map(&:join), second_array.shift.product(*second_array).map(&:join)]
+      first_combination = first_array.shift.product(*first_array).map(&:join)
+      next if first_combination.blank?
+      second_combination = second_array.shift.product(*second_array).map(&:join)
+      next if second_combination.blank?
+      results[i] = [(first_combination & dictionary), (second_combination & dictionary)]
     end
     #results[9] = keys.shift.product(*keys).map(&:join)
-    results.each do |key, combinataion|
-      first_combo = (combinataion.first & dictionary)
-      second_combo = (combinataion.last & dictionary)
-      next if first_combo.blank? || second_combo.blank?
-
-      #results[key] = [, ]
-    end
-
+    # final_array = []
+    # results.each do |key, combinataion|
+    #   first_combo = (combinataion.first & dictionary)
+    #   next if first_combo.blank?
+    #   second_combo = (combinataion.last & dictionary)
+    #   next if second_combo.blank?
+    #   final_array[key] = [first_combo, second_combo]
+    #end
+    #final_array.compact!
+    debugger
+    results
     #debugger
     #print results
   end
