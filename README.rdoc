@@ -1,6 +1,9 @@
-Its a simple rails application you just need to clone application then need to run rails server
-by rails s
-and open browser and type http://localhost:3000/
-where you can see a text field used for enter numbers to convert them to words.
+Its a simple rails application you just a simple rails app just follow the below steps for setup and run application:
 
-Also there are a simpme test cased for all those examples.
+1) install rails and ruby 2.3.0
+2) clone app
+3) run bundle
+4) run rails s
+5) hit http://localhost:3000/ at browser
+
+thats it!!
