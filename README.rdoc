@@ -1,28 +1,6 @@
-== README
+Its a simple rails application you just need to clone application then need to run rails server
+by rails s
+and open browser and type http://localhost:3000/
+where you can see a text field used for enter numbers to convert them to words.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Also there are a simpme test cased for all those examples.
