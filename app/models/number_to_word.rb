@@ -1,40 +1,34 @@
 # a recursive method
 class NumberToWord
 
+
   def letter_combinations(digits)
     letters = {"2" => ["a", "b", "c"],"3" => ["d", "e", "f"],"4" => ["g", "h", "i"],"5" => ["j", "k", "l"],"6" => ["m", "n", "o"],"7" => ["p", "q", "r", "s"],"8" => ["t", "u", "v"],"9" => ["w", "x", "y", "z"]}
-
     dictionary = []
     file_path = Rails.root.join("db","dictionary.txt")
     File.foreach( file_path ) do |word|
       dictionary.push word.chop.to_s.downcase
     end
-
-    #digits = digits.split('')
-    words = []
     keys = digits.chars.map{|digit|letters[digit]}
-    #words = keys.shift.product(*keys).map(&:join).reverse
-    words = product_of_array(keys)
+    results = {}
+    total_number = keys.length - 1
+    for i in (2..total_number)
+      first_array = keys[0..i]
+      second_array = keys[i + 1..total_number]
+      next if first_array.length < 3 || second_array.length < 3
+      results[i] = [first_array.shift.product(*first_array).map(&:join), second_array.shift.product(*second_array).map(&:join)]
+    end
+    #results[9] = keys.shift.product(*keys).map(&:join)
+    results.each do |key, combinataion|
+      first_combo = (combinataion.first & dictionary)
+      second_combo = (combinataion.last & dictionary)
+      next if first_combo.blank? || second_combo.blank?
 
-    # # Total number of combinations
-    # digits = digits.split('')
-    # numbers = digits.inject(1) { |a,b| a * letters[b].size }
-    # puts numbers
-    # words = []
-    # 0.upto numbers-1 do |qu|
-    #   word = []
-    #   digits.reverse.each do |digit|
-    #     qu, r = qu.divmod letters[digit].size
-    #     word.unshift letters[digit][r]
-    #     if word.length > 2 && dictionary.include?(word.join) && !words.include?(word.join)
-    #       words << word.join
-    #       #word = []
-    #     end
-    #   end
-    # end
+      #results[key] = [, ]
+    end
 
-    print words & dictionary
-    # return "Done"
+    #debugger
+    #print results
   end
 
   def product_of_array(keys, words=[])
