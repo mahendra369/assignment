@@ -1,9 +1,14 @@
 Its a simple rails application you just a simple rails app just follow the below steps for setup and run application:
 
 1) install rails and ruby 2.3.0
+
 2) clone app
+
 3) run bundle
+
 4) run rails s
+
 5) hit http://localhost:3000/ at browser
 
-thats it!!
+6) Here you can add 10 any digit number to test functionlities. 
+
